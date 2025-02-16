@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-test
+  template:
+    metadata:
+      labels:
+        app: mysql-test
+    spec:
+      containers:
+        - name: mysql-test
+          image: quay.io/hbelmiro/mysql-client-go-test:dev-17397173263N
+          env:
+            - name: MYSQL_USER
+              value: "mlpipeline"
+            - name: MYSQL_PASSWORD
+              value: "password"
+            - name: MYSQL_HOST
+              value: "mariadb.test-mariadb.svc.cluster.local"
+            - name: MYSQL_PORT
+              value: "3306"
+            - name: MYSQL_DB
+              value: "mlpipeline"
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
