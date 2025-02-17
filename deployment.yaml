@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mysql-test
-          image: quay.io/hbelmiro/mysql-client-go-test:dev-17397173263N
+          image: quay.io/hbelmiro/mysql-client-go-test:dev-17398118403N
           env:
             - name: MYSQL_USER
               value: "mlpipeline"

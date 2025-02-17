@@ -35,8 +35,11 @@ func main() {
 	rootCertPool.AppendCertsFromPEM(pem)
 
 	err = mysql.RegisterTLSConfig("custom", &tls.Config{
-		RootCAs:            rootCertPool,
-		InsecureSkipVerify: false,
+		RootCAs:    rootCertPool,
+		MinVersion: tls.VersionTLS12,
+		CipherSuites: []uint16{
+			tls.TLS_RSA_WITH_AES_256_GCM_SHA384,
+		},
 	})
 	if err != nil {
 		log.Fatalf("Error registering TLS Config: %v", err)
